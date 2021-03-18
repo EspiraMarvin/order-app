@@ -6,6 +6,6 @@
 
 <script>
 export default {
-  name: 'ChamaApp'
+  name: 'OrderApp'
 };
 </script>
