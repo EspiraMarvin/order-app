@@ -19,7 +19,8 @@ class RoleTableSeeder extends Seeder
 
         Role::create([
             'name' => 'normal',
-            'display_name' => 'Normal User'
+            'display_name' => 'Supplier'
+//            'display_name' => 'Normal User'
         ]);
     }
 }

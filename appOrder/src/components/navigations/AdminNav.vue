@@ -72,7 +72,7 @@ export default {
   data() {
     return {
       leftDrawerOpen: false,
-      title: 'Chama Contributions - Administration'
+      title: 'Orders - Administration'
     };
   },
   computed: {
