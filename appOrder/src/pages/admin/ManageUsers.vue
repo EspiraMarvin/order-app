@@ -90,7 +90,7 @@
       <q-card style="width: 700px; max-width: 80vw;">
         <q-card-section>
           <q-toolbar>
-<!--            <q-toolbar-title>{{ dialogTitle }}</q-toolbar-title>-->
+            <!--            <q-toolbar-title>{{ dialogTitle }}</q-toolbar-title>-->
           </q-toolbar>
           <q-form ref="addUserForm">
             <div class="row">

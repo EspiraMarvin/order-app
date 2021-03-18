@@ -3,6 +3,8 @@ import Vuex from 'vuex';
 
 import commonStore from './modules/common/index';
 import userStore from './modules/users/index';
+// import supplierStore from './modules/suppliers/index';
+
 
 Vue.use(Vuex);
 
@@ -18,7 +20,8 @@ Vue.use(Vuex);
 export const Store = new Vuex.Store({
   modules: {
     commonStore,
-    userStore
+    userStore,
+    // supplierStore
   },
 
   strict: process.env.DEV
