@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,8 +20,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'phone',
-        'id_no',
     ];
 
     /**
