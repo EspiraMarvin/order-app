@@ -21,8 +21,6 @@ class UserController extends Controller
         $data = \request()->validate([
             'name' => 'required',
             'email' => 'required',
-            'phone' => 'required',
-            'id_no' => 'required'
         ]);
         $user = User::findorFail($id);
         if ($user){

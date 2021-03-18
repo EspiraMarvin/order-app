@@ -14,6 +14,18 @@ class SupplierResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+//        return parent::toArray($request);
+        return [
+        'type' => 'Supplier Object',
+        'id' => $this->id,
+        'name' => $this->name,
+        'created_at' => $this->created_at,
+        'updated_at' => $this->updated_at,
+        'deleted_at' => $this->deleted_at,
+        'relationships' => [
+            'products' => $this->products,
+        ]
+    ];
+
     }
 }
