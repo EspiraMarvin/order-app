@@ -1,6 +1,6 @@
-# Chama App (chama_app)
+# Order App (order_app)
 
-Chama Hybrid App
+Order Hybrid App
 
 ## Install the dependencies
 ```bash
