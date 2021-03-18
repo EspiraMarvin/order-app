@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ggSupplierTableSeeder extends Seeder
+class SupplierTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
