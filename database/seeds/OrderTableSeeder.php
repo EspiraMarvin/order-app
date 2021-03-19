@@ -13,21 +13,21 @@ class OrderTableSeeder extends Seeder
     public function run()
     {
         $order = Order::create([
-            'order_no' => '1'
+            'order_no' => '1',
         ]);
 
         $order->products()->attach(1);
 
         $order = Order::create([
-            'order_no' => '2'
+            'order_no' => '2',
         ]);
 
-        $order->products()->attach(1);
+        $order->products()->attach(2);
 
         $order = Order::create([
-            'order_no' => '3'
+            'order_no' => '3',
         ]);
 
-        $order->products()->attach(1);
+        $order->products()->attach(3);
     }
 }

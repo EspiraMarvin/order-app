@@ -12,22 +12,23 @@ class SupplierTableSeeder extends Seeder
      */
     public function run()
     {
+
         $supplier = Supplier::create([
             'name' => 'John Doe'
         ]);
 
-        $supplier->products()->attach(1);
+//        $supplier->products()->attach(1);
 
         $supplier = Supplier::create([
             'name' => 'Jane Doe'
         ]);
 
-        $supplier->products()->attach(1);
+//        $supplier->products()->attach(2);
 
         $supplier = Supplier::create([
             'name' => 'Billy Kimber'
         ]);
 
-        $supplier->products()->attach(1);
+//        $supplier->products()->attach(3);
     }
 }

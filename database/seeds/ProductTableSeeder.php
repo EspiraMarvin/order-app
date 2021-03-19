@@ -18,7 +18,7 @@ class ProductTableSeeder extends Seeder
             'quantity' => '4',
         ]);
 
-        $product->orders()->attach(1);
+//        $product->orders()->attach(1);
         $product->suppliers()->attach(1);
 
         $product = Product::create([
@@ -27,8 +27,8 @@ class ProductTableSeeder extends Seeder
             'quantity' => '1',
         ]);
 
-        $product->orders()->attach(1);
-        $product->suppliers()->attach(1);
+//        $product->orders()->attach(1);
+        $product->suppliers()->attach(2);
 
         $product = Product::create([
             'name' => 'Hp Monitor 21 Inch',
@@ -36,7 +36,7 @@ class ProductTableSeeder extends Seeder
             'quantity' => '1',
         ]);
 
-        $product->orders()->attach(1);
-        $product->suppliers()->attach(1);
+//        $product->orders()->attach(1);
+        $product->suppliers()->attach(3);
     }
 }
