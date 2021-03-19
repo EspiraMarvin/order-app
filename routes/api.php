@@ -29,6 +29,9 @@ Route::middleware('auth:api')->put('edit/{id}','User\UserController@editUser');
 Route::middleware('auth:api')->delete('delete/{id}','User\UserController@deleteUser');
 Route::middleware('auth:api')->get('users','User\UserController@getAll');
 
+// roles
+Route::get('/users/roles/get', 'User\UserController@rolesIndex')->name('user.roles.get');
+
 // supplier
 Route::middleware('auth:api')->get('suppliers', 'Api\Supplier\SupplierController@getAll');
 Route::middleware('auth:api')->post('add-supplier', 'Api\Supplier\SupplierController@addSupplier');

@@ -27,7 +27,7 @@
         <router-link :to="{ name: 'AdminPage' }" class="router-link">
           <q-item clickable>
             <q-item-section avatar>
-              <q-icon name="account_circle"></q-icon>
+              <q-icon name="dashboard"></q-icon>
             </q-item-section>
 
             <q-item-section>
@@ -39,11 +39,47 @@
         <router-link :to="{ name: 'ManageUsers' }" class="router-link">
           <q-item clickable>
             <q-item-section avatar>
-              <q-icon name="account_circle"></q-icon>
+              <q-icon name="eva-person-outline"></q-icon>
             </q-item-section>
 
             <q-item-section>
               users
+            </q-item-section>
+          </q-item>
+        </router-link>
+
+        <router-link :to="{ name: 'Suppliers' }" class="router-link">
+          <q-item clickable>
+            <q-item-section avatar>
+              <q-icon name="eva-people-outline"></q-icon>
+            </q-item-section>
+
+            <q-item-section>
+              Suppliers
+            </q-item-section>
+          </q-item>
+        </router-link>
+
+        <router-link :to="{ name: 'Products' }" class="router-link">
+          <q-item clickable>
+            <q-item-section avatar>
+              <q-icon name="eva-clipboard-outline"></q-icon>
+            </q-item-section>
+
+            <q-item-section>
+              Products
+            </q-item-section>
+          </q-item>
+        </router-link>
+
+        <router-link :to="{ name: 'Orders' }" class="router-link">
+          <q-item clickable>
+            <q-item-section avatar>
+              <q-icon name="eva-shopping-cart-outline"></q-icon>
+            </q-item-section>
+
+            <q-item-section>
+              Orders
             </q-item-section>
           </q-item>
         </router-link>

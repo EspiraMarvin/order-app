@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UniversalResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Models\Role;
@@ -35,6 +36,11 @@ class UserController extends Controller
     {
         $user = User::findorFail($id);
         $user->delete();
+    }
+
+    public function rolesIndex()
+    {
+        return UniversalResource::collection(Role::query()->where('name', '!=', 'admin')->paginate(15));
     }
 
 

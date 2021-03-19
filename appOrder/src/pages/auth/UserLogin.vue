@@ -80,12 +80,12 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import commonMixins from '../../mixins/commonMixins';
+import commonFunctions from '../../mixins/commonFunctions';
 // import { token, http } from '../../boot/service';
 
 export default {
   name: 'UserLogin',
-  mixins: [commonMixins],
+  mixins: [commonFunctions],
   created() {
     this.loginSuccess();
   },
@@ -99,7 +99,6 @@ export default {
         email: '',
         password: ''
       },
-      // logoUrl: '../appChama/src/statics/images/order_icon.png'
       logoUrl: 'statics/images/order_icon.png'
     };
   },

@@ -12,6 +12,9 @@ const mutations = {
   SET_NOTIFICATION(state, value) {
     state.notification = value;
   },
+  SET_DASHBOARD_TITLE(state, value) {
+    state.dashboardTitle = value;
+  },
   SET_ERRORS(state, value) {
     state.errors = value;
   }

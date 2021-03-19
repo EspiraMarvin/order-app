@@ -15,16 +15,16 @@ const getters = {
 };
 
 const mutations = {
-  SET_FETCHING_PRODUCTS(state, value) {
-    state.fetchingProducts = value;
+  SET_FETCHING_PRODUCTS(state, data) {
+    state.fetchingProducts = data;
   },
 
-  SET_PRODUCTS(state, value) {
-    state.products = value;
+  SET_PRODUCTS(state, data) {
+    state.products = data;
   },
 
-  SET_ADDING_PRODUCT(state, value) {
-    state.addingProduct = value;
+  SET_ADDING_PRODUCT(state, data) {
+    state.addingProduct = data;
   }
 };
 
@@ -33,6 +33,7 @@ const actions = {
     context.commit('SET_ADDING_PRODUCT', true);
     axios
       .post(baseUrl + 'add-product/', appendForm(form))
+      // eslint-disable-next-line no-unused-vars
       .then(({ data }) => {
         context.commit('SET_ADDING_PRODUCT', false);
         let alert = {
@@ -88,6 +89,7 @@ const actions = {
 
     http
       .post(baseUrl + 'edit-product/' + form.id, appendEditForm(form))
+      // eslint-disable-next-line no-unused-vars
       .then(({ data }) => {
         context.commit('SET_ADDING_PRODUCT', false);
         let alert = {
@@ -117,6 +119,7 @@ const actions = {
 
   DELETE_PRODUCT(context, id) {
     context.commit('SET_ADDING_PRODUCT', true);
+    // eslint-disable-next-line no-unused-vars
     http.delete(baseUrl + 'delete-product/' + id).then(({ data }) => {
       context.commit('SET_ADDING_PRODUCT', false);
       let alert = {

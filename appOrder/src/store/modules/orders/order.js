@@ -15,16 +15,16 @@ const getters = {
 };
 
 const mutations = {
-  SET_ADDING_ORDER(state, value) {
-    state.addingOrder = value;
+  SET_ADDING_ORDER(state, data) {
+    state.addingOrder = data;
   },
 
-  SET_FETCHING_ORDERS(state, value) {
-    state.fetchingOrders = value;
+  SET_FETCHING_ORDERS(state, data) {
+    state.fetchingOrders = data;
   },
 
-  SET_ORDERS(state, value) {
-    state.orders = value;
+  SET_ORDERS(state, data) {
+    state.orders = data;
   }
 };
 
@@ -33,6 +33,7 @@ const actions = {
     context.commit('SET_ADDING_ORDER', true);
     axios
       .post(baseUrl + 'add-order/', appendForm(form))
+      // eslint-disable-next-line no-unused-vars
       .then(({ data }) => {
         context.commit('SET_ADDING_ORDER', false);
         let alert = {
@@ -88,6 +89,7 @@ const actions = {
 
     http
       .post(baseUrl + 'edit-order/' + form.id, appendEditForm(form))
+      // eslint-disable-next-line no-unused-vars
       .then(({ data }) => {
         context.commit('SET_ADDING_ORDER', false);
         let alert = {
@@ -117,6 +119,7 @@ const actions = {
 
   DELETE_ORDER(context, id) {
     context.commit('SET_ADDING_ORDER', true);
+    // eslint-disable-next-line no-unused-vars
     http.delete(baseUrl + 'delete-supplier/' + id).then(({ data }) => {
       context.commit('SET_ADDING_ORDER', false);
       let alert = {

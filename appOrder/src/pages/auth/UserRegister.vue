@@ -85,11 +85,11 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import commonMixins from '../../mixins/commonMixins';
+import commonFunctions from '../../mixins/commonFunctions';
 
 export default {
   name: 'UserRegister',
-  mixins: [commonMixins],
+  mixins: [commonFunctions],
   created() {},
   data() {
     return {

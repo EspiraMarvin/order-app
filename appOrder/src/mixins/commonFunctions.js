@@ -1,6 +1,6 @@
 import { mapGetters } from 'vuex';
 
-const commonMixins = {
+const commonFunctions = {
   created() {},
 
   data() {
@@ -15,7 +15,7 @@ const commonMixins = {
   },
 
   methods: {
-    chamaNotifyColor(color, message, position) {
+    orderNotify(color, message, position) {
       this.$q.notify({
         color: color,
         message: message,
@@ -27,7 +27,7 @@ const commonMixins = {
       return string.replace(/_/g, ' ');
     },
 
-    chamaNotifyType(type, message, position) {
+    OrderNotifyType(type, message, position) {
       this.$q.notify({
         type: type,
         message: message,
@@ -61,7 +61,7 @@ const commonMixins = {
       handler() {
         if (this.errors.length !== 0) {
           this.errors.forEach(error => {
-            this.chamaNotifyType('negative', error, 'top');
+            this.OrderNotifyType('negative', error, 'top');
           });
           //reset the store for the next action call
           this.$store.commit('SET_ERRORS', []);
@@ -71,4 +71,4 @@ const commonMixins = {
   }
 };
 
-export default commonMixins;
+export default commonFunctions;

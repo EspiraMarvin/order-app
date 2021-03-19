@@ -15,16 +15,16 @@ const getters = {
 };
 
 const mutations = {
-  SET_FETCHING_SUPPLIERS(state, value) {
-    state.fetchingSuppliers = value;
+  SET_FETCHING_SUPPLIERS(state, data) {
+    state.fetchingSuppliers = data;
   },
 
-  SET_SUPPLIERS(state, value) {
-    state.suppliers = value;
+  SET_SUPPLIERS(state, data) {
+    state.suppliers = data;
   },
 
-  SET_ADDING_SUPPLIER(state, value) {
-    state.addingSupplier = value;
+  SET_ADDING_SUPPLIER(state, data) {
+    state.addingSupplier = data;
   }
 };
 
@@ -33,6 +33,7 @@ const actions = {
     context.commit('SET_ADDING_SUPPLIER', true);
     axios
       .post(baseUrl + 'add-supplier/', appendForm(form))
+      // eslint-disable-next-line no-unused-vars
       .then(({ data }) => {
         context.commit('SET_ADDING_SUPPLIER', false);
         let alert = {
@@ -88,6 +89,7 @@ const actions = {
 
     http
       .post(baseUrl + 'edit-supplier/' + form.id, appendEditForm(form))
+      // eslint-disable-next-line no-unused-vars
       .then(({ data }) => {
         context.commit('SET_ADDING_SUPPLIER', false);
         let alert = {
@@ -117,6 +119,7 @@ const actions = {
 
   DELETE_SUPPLIER(context, id) {
     context.commit('SET_ADDING_SUPPLIER', true);
+    // eslint-disable-next-line no-unused-vars
     http.delete(baseUrl + 'delete-supplier/' + id).then(({ data }) => {
       context.commit('SET_ADDING_SUPPLIER', false);
       let alert = {

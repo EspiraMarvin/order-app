@@ -4,11 +4,11 @@ import { appendEditForm, appendForm } from 'src/helpers/commonFunctions';
 import appStorage from 'src/helpers/appStorage';
 
 const state = () => ({
-  users: {},
+  token: localStorage.getItem('access_token') || null,
+  currentUser: JSON.parse(localStorage.getItem('currentUser')) || null,
   fetchingUsers: false,
   addingUser: false,
-  token: localStorage.getItem('access_token') || null,
-  currentUser: JSON.parse(localStorage.getItem('currentUser')) || null
+  users: {}
 });
 
 const getters = {
@@ -20,24 +20,24 @@ const getters = {
 };
 
 const mutations = {
-  SET_FETCHING_USERS(state, value) {
-    state.fetchingUsers = value;
+  SET_FETCHING_USERS(state, data) {
+    state.fetchingUsers = data;
   },
 
-  SET_USERS(state, value) {
-    state.users = value;
+  SET_USERS(state, data) {
+    state.users = data;
   },
 
-  SET_ADDING_USER(state, value) {
-    state.addingUser = value;
+  SET_ADDING_USER(state, data) {
+    state.addingUser = data;
   },
 
-  SET_TOKEN(state, value) {
-    state.token = value;
+  SET_TOKEN(state, data) {
+    state.token = data;
   },
 
-  SET_CURRENT_USER(state, value) {
-    state.currentUser = value;
+  SET_CURRENT_USER(state, data) {
+    state.currentUser = data;
   }
 };
 
@@ -48,7 +48,6 @@ const actions = {
     axios
       .post(baseUrl + 'auth/login', appendForm(form))
       .then(({ data }) => {
-        context.commit('SET_ADDING_USER', false);
         let alert = {
           type: 'positive',
           message: 'Login Successful',
@@ -71,6 +70,7 @@ const actions = {
           alert.message = error.response.data.message;
         }
         context.commit('SET_NOTIFICATION', alert, { root: true });
+        context.commit('SET_ADDING_USER', false);
       });
   },
 
