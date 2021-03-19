@@ -104,6 +104,7 @@
       </div>
     </q-card>
 
+
     <!-- dialogs -->
     <q-dialog v-model="confirm" transition-show="rotate" transition-hide="rotate" persistent>
       <q-card>
