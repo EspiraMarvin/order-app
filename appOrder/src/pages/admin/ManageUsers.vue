@@ -165,7 +165,7 @@
               v-model="userForm.role_id"
               :options="rolesResult.data"
               option-value="id"
-              option-label="name"
+              option-label="display_name"
             />
           </q-form>
         </q-card-section>

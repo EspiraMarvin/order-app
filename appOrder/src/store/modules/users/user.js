@@ -107,10 +107,10 @@ const actions = {
       });
   },
 
-  FETCH_USERS(context, filters) {
+  FETCH_USERS(context, pagination) {
     context.commit('SET_FETCHING_USERS', true);
     http
-      .get(`users?page=${filters.page} &filters=${JSON.stringify(filters)}`)
+      .get(`users?page=${pagination.page} &filters=${JSON.stringify(pagination)}`)
       .then(({ data }) => {
         context.commit('SET_FETCHING_USERS', false);
         context.commit('SET_USERS', data);

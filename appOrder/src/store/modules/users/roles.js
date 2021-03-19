@@ -30,6 +30,7 @@ const actions = {
     http
       .get(`users/roles/get?page=${page}`)
       .then(({ data }) => {
+        console.log('roles data', data);
         context.commit('SET_FETCHING_ROLES', false);
         context.commit('SET_ROLES', data);
       })

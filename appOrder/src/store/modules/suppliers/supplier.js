@@ -10,7 +10,7 @@ const state = () => ({
 
 const getters = {
   GET_FETCHING_SUPPLIERS: state => state.fetchingSuppliers,
-  GET_SUPPLIERS: state => state.supplier,
+  GET_SUPPLIERS: state => state.suppliers,
   GET_ADDING_SUPPLIER: state => state.addingSupplier
 };
 
@@ -64,8 +64,9 @@ const actions = {
   FETCH_SUPPLIERS(context, filters) {
     context.commit('SET_FETCHING_SUPPLIERS', true);
     http
-      .get(`suppliers?page=${filters.page} &filters=${JSON.stringify(filters)}`)
+      .get(`suppliers?page=${filters.page}&filters=${JSON.stringify(filters)}`)
       .then(({ data }) => {
+        console.log('supplier', data);
         context.commit('SET_FETCHING_SUPPLIERS', false);
         context.commit('SET_SUPPLIERS', data);
         // console.log('suppliers data', data)
