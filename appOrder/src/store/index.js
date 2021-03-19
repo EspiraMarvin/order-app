@@ -4,7 +4,8 @@ import Vuex from 'vuex';
 import commonStore from './modules/common/index';
 import userStore from './modules/users/index';
 // import supplierStore from './modules/suppliers/index';
-
+// import productStore from './modules/products/index'
+// import orderStore from './modules/orders/index'
 
 Vue.use(Vuex);
 
@@ -20,8 +21,10 @@ Vue.use(Vuex);
 export const Store = new Vuex.Store({
   modules: {
     commonStore,
-    userStore,
-    // supplierStore
+    userStore
+    // supplierStore,
+    // productStore,
+    // orderStore
   },
 
   strict: process.env.DEV

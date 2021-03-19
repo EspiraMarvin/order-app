@@ -31,18 +31,18 @@ Route::middleware('auth:api')->get('users','User\UserController@getAll');
 
 // supplier
 Route::middleware('auth:api')->get('suppliers', 'Api\Supplier\SupplierController@getAll');
-Route::middleware('auth:api')->post('addSupplier', 'Api\Supplier\SupplierController@addSupplier');
-Route::middleware('auth:api')->put('editSupplier/{id}', 'Api\Supplier\SupplierController@editSupplier');
-Route::middleware('auth:api')->delete('deleteSupplier/{id}', 'Api\Supplier\SupplierController@deleteSupplier');
+Route::middleware('auth:api')->post('add-supplier', 'Api\Supplier\SupplierController@addSupplier');
+Route::middleware('auth:api')->put('edit-supplier/{id}', 'Api\Supplier\SupplierController@editSupplier');
+Route::middleware('auth:api')->delete('delete-supplier/{id}', 'Api\Supplier\SupplierController@deleteSupplier');
 
 // product
 Route::middleware('auth:api')->get('products', 'Api\Product\ProductController@getAll');
-Route::middleware('auth:api')->post('addProduct', 'Api\Product\ProductController@addProduct');
-Route::middleware('auth:api')->put('editProduct/{id}', 'Api\Product\ProductController@editProduct');
+Route::middleware('auth:api')->post('add-product', 'Api\Product\ProductController@addProduct');
+Route::middleware('auth:api')->put('edit-product/{id}', 'Api\Product\ProductController@editProduct');
 Route::middleware('auth:api')->delete('deleteProduct/{id}', 'Api\Product\ProductController@deleteProduct');
 
 // order
 Route::middleware('auth:api')->get('orders', 'Api\Order\OrderController@getAll');
-Route::middleware('auth:api')->post('addOrder', 'Api\Order\OrderController@addOrder');
-Route::middleware('auth:api')->put('editOrder/{id}', 'Api\Order\OrderController@editOrder');
-Route::middleware('auth:api')->delete('deleteOrder/{id}', 'Api\Order\OrderController@deleteOrder');
+Route::middleware('auth:api')->post('add-order', 'Api\Order\OrderController@addOrder');
+Route::middleware('auth:api')->put('edit-order/{id}', 'Api\Order\OrderController@editOrder');
+Route::middleware('auth:api')->delete('delete-order/{id}', 'Api\Order\OrderController@deleteOrder');

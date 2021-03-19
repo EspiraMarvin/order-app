@@ -99,8 +99,8 @@ export default {
         email: '',
         password: ''
       },
-      // logoUrl: '../appChama/src/statics/images/chama_icon.png'
-      logoUrl: 'statics/images/chama_icon.png'
+      // logoUrl: '../appChama/src/statics/images/order_icon.png'
+      logoUrl: 'statics/images/order_icon.png'
     };
   },
   computed: {

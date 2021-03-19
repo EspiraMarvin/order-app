@@ -93,7 +93,7 @@ export default {
   created() {},
   data() {
     return {
-      logoUrl: '../appChama/src/statics/images/chama_icon.png',
+      logoUrl: '../appChama/src/statics/images/order_icon.png',
       form: {
         name: '',
         email: '',

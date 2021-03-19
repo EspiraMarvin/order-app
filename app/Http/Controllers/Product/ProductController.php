@@ -25,12 +25,12 @@ class ProductController extends Controller
 
         $product = Product::create($data);
         // trying to attach all
-        $product->products()->attach()->all();
+        $product->products()->attach();
         // attaching two to see the difference
 //        $product->products()->attach(2);
 
         // attaching suppliers
-        $product->suppliers()->attach()->all();
+        $product->suppliers()->attach();
 
         return response()->json(['data' => new ProductResource($product)]);
     }

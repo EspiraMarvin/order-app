@@ -32,7 +32,7 @@ const actions = {
   ADD_SUPPLIER(context, form) {
     context.commit('SET_ADDING_SUPPLIER', true);
     axios
-      .post(baseUrl + 'addSupplier/', appendForm(form))
+      .post(baseUrl + 'add-supplier/', appendForm(form))
       .then(({ data }) => {
         context.commit('SET_ADDING_SUPPLIER', false);
         let alert = {
