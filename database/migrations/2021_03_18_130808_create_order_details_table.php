@@ -18,6 +18,7 @@ class CreateOrderDetailsTable extends Migration
             $table->bigInteger('order_id');
             $table->bigInteger('product_id');
             $table->timestamps();
+            $table->SoftDeletes();
         });
     }
 

@@ -18,6 +18,7 @@ class CreateRoleUserTable extends Migration
             $table->bigInteger('role_id');
             $table->bigInteger('user_id');
             $table->timestamps();
+            $table->SoftDeletes();
         });
     }
 

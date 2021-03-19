@@ -31,7 +31,6 @@
 
         <template v-slot:top-right>
           <q-input
-            v-if="false"
             borderless
             dense
             debounce="1000"
@@ -104,7 +103,7 @@
       </div>
     </q-card>
 
-    <!-- dialogs -->
+    <!--     dialogs -->
     <q-dialog v-model="confirm" transition-show="rotate" transition-hide="rotate" persistent>
       <q-card>
         <q-card-section class="row items-center">
@@ -189,7 +188,7 @@
       </q-card>
     </q-dialog>
 
-    <!-- end dialogs -->
+    <!--    end dialogs -->
   </q-page>
 </template>
 
@@ -360,6 +359,7 @@ export default {
 </script>
 
 <style scoped></style>
+-->
 
 <!--
 <template>

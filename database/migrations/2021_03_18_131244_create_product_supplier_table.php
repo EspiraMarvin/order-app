@@ -18,6 +18,7 @@ class CreateProductSupplierTable extends Migration
             $table->bigInteger('product_id');
             $table->bigInteger('supplier_id');
             $table->timestamps();
+            $table->SoftDeletes();
         });
     }
 
@@ -28,6 +29,10 @@ class CreateProductSupplierTable extends Migration
      */
     public function down()
     {
+
+//        Schema::table('product_supplier', function (Blueprint $table) {
+//            $table->dropSoftDeletes();
+//        });
         Schema::dropIfExists('product_supplier');
     }
 }

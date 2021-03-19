@@ -61,7 +61,7 @@ const actions = {
       });
   },
 
-  FETCH_SUPPLIERS(context, filters) {
+  FETCH_ORDERS(context, filters) {
     context.commit('SET_FETCHING_ORDERS', true);
     http
       .get(`orders?page=${filters.page} &filters=${JSON.stringify(filters)}`)

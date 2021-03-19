@@ -33,7 +33,7 @@ Route::middleware('auth:api')->get('users','User\UserController@getAll');
 Route::get('/users/roles/get', 'User\UserController@rolesIndex')->name('user.roles.get');
 
 // supplier
-Route::middleware('auth:api')->get('/suppliers', 'Supplier\SupplierController@getAll');
+Route::middleware('auth:api')->get('suppliers', 'Supplier\SupplierController@getAll');
 Route::middleware('auth:api')->post('add-supplier', 'Supplier\SupplierController@addSupplier');
 Route::middleware('auth:api')->put('edit-supplier/{id}', 'Supplier\SupplierController@editSupplier');
 Route::middleware('auth:api')->delete('delete-supplier/{id}', 'Supplier\SupplierController@deleteSupplier');

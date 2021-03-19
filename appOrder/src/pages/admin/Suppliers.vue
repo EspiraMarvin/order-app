@@ -45,7 +45,7 @@
             </template>
           </q-input>
           <q-btn
-            label="Add User"
+            label="Add Supplier"
             color="gray"
             class="q-mr-sm text-black q-pl-md q-pr-md"
             @click="buttonCreate"

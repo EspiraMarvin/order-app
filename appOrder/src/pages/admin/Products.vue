@@ -2,11 +2,11 @@
   <q-page>
     <q-card elevated class="q-pa-md q-ma-md">
       <q-table
-        title="Suppliers List"
+        title="Products List"
         :data="productsResult.data"
         :columns="tableHeaders"
         row-key="id"
-        :loading="loadingSuppliers"
+        :loading="loadingProducts"
         :filter="pagination.filter"
         :pagination.sync="pagination"
         @request="onRequest"
@@ -170,8 +170,8 @@ export default {
   name: 'Products',
   mixins: [CommonMixins],
   created() {
-    this.$store.commit('SET_DASHBOARD_TITLE', 'Supplier Management');
-    this.$store.dispatch('FETCH_SUPPLIERS', this.pagination);
+    this.$store.commit('SET_DASHBOARD_TITLE', 'Products Management');
+    this.$store.dispatch('FETCH_PRODUCTS', this.pagination);
   },
   data() {
     return {
@@ -200,9 +200,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      loadingSuppliers: 'GET_FETCHING_SUPPLIERS',
-      productsResult: 'GET_SUPPLIERS',
-      addingProduct: 'GET_ADDING_SUPPLIER'
+      loadingProducts: 'GET_FETCHING_PRODUCTS',
+      productsResult: 'GET_PRODUCTS',
+      addingProduct: 'GET_ADDING_PRODUCT'
     }),
     tableHeaders() {
       let columnObjects = [];
@@ -236,18 +236,18 @@ export default {
   },
   methods: {
     ...mapActions({
-      addProduct: 'ADD_SUPPLIER',
-      deleteSupplier: 'DELETE_SUPPLIER',
-      editProduct: 'EDIT_SUPPLIER'
+      addProduct: 'ADD_PRODUCT',
+      deleteProduct: 'DELETE_PRODUCT',
+      editProduct: 'EDIT_PRODUCT'
     }),
     onPageChange(data) {
       this.pagination.page = data;
-      this.$store.dispatch('FETCH_SUPPLIERS', this.pagination);
+      this.$store.dispatch('FETCH_PRODUCTS', this.pagination);
     },
     onRequest(data) {
       if (data.filter) {
         data.pagination.filter = data.filter;
-        this.$store.dispatch('FETCH_SUPPLIERS', data.pagination);
+        this.$store.dispatch('FETCH_PRODUCTS', data.pagination);
       }
     },
     buttonCreate() {
@@ -278,7 +278,7 @@ export default {
     },
     proceedDelete() {
       this.confirm = false;
-      this.deleteSupplier(this.deleteId);
+      this.deleteProduct(this.deleteId);
     },
     btnSave() {
       console.log('clicked');

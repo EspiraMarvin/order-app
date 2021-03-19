@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->string('order_no');
             $table->timestamps();
+            $table->SoftDeletes();
         });
     }
 
@@ -28,5 +29,7 @@ class CreateOrdersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('orders');
+//            $table->dropSoftDeletes();
+
     }
 }

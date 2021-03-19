@@ -4,9 +4,13 @@ namespace App\Supplier;
 
 use App\Product\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Supplier extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'name'
     ];
