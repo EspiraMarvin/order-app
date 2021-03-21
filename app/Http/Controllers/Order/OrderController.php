@@ -34,7 +34,8 @@ class OrderController extends Controller
             'order_no' => 'required',
         ]);
         $order = Order::find($id);
-        if ($order) {
+
+        if (!$order) {
             throw new UnprocessableEntityHttpException('Order Not Found');
         }
         $order->update($data);

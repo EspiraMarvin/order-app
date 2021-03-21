@@ -41,7 +41,7 @@ class SupplierController extends Controller
 
         $supplier = Supplier::find($id);
 
-        if ($supplier) {
+        if (!$supplier) {
             throw new UnprocessableEntityHttpException('Supplier Not Found');
         }
         $supplier->update($data);

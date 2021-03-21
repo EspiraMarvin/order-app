@@ -44,7 +44,8 @@ class ProductController extends Controller
             'quantity' => 'required'
         ]);
         $product = Product::find($id);
-        if ($product) {
+
+        if (!$product) {
             throw new UnprocessableEntityHttpException('Product Not Found');
         }
         $product->update($data);
