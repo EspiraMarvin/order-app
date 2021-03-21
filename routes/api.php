@@ -14,38 +14,40 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::middleware('auth:api')->get('/user', function (Request $request) {
+/*Route::get('/user', function (Request $request) {
     return $request->user();
 });*/
 
 // add/register user
-Route::post('auth/register','Api\AuthController@register');
 Route::post('auth/login','Api\AuthController@login');
 
-// user - get user details
-Route::middleware('auth:api')->get('user_details','Api\AuthController@userDetails');
-// user
-Route::middleware('auth:api')->put('edit/{id}','User\UserController@editUser');
-Route::middleware('auth:api')->delete('delete/{id}','User\UserController@deleteUser');
-Route::middleware('auth:api')->get('users','User\UserController@getAll');
 
-// roles
-Route::get('/users/roles/get', 'User\UserController@rolesIndex')->name('user.roles.get');
+Route::group(['middleware' => ['auth:api']], function () {
+    // users
+    Route::post('auth/register','Api\AuthController@register');
+    Route::get('/user_details','Api\AuthController@userDetails');
+    Route::get('/users/index','User\UserController@index')->name('users.index');
+    Route::put('/users/{id}/update','User\UserController@update')->name('user.update');
+    Route::delete('/users/{id}/delete', 'User\UserController@destroy')->name('users.destroy');
+    // roles
+    Route::get('/users/roles/get', 'User\UserController@rolesIndex')->name('user.roles.get');
 
 // supplier
-Route::middleware('auth:api')->get('suppliers', 'Supplier\SupplierController@getAll');
-Route::middleware('auth:api')->post('add-supplier', 'Supplier\SupplierController@addSupplier');
-Route::middleware('auth:api')->put('edit-supplier/{id}', 'Supplier\SupplierController@editSupplier');
-Route::middleware('auth:api')->delete('delete-supplier/{id}', 'Supplier\SupplierController@deleteSupplier');
+    Route::get('/suppliers/index', 'Supplier\SupplierController@index')->name('suppliers.index');
+    Route::post('/suppliers/add', 'Supplier\SupplierController@store')->name('suppliers.store');
+    Route::put('/suppliers/{id}/update', 'Supplier\SupplierController@update')->name('suppliers.update.');
+    Route::delete('/suppliers/{id}/delete', 'Supplier\SupplierController@destroy')->name('suppliers.destroy');
 
 // product
-Route::middleware('auth:api')->get('products', 'Product\ProductController@getAll');
-Route::middleware('auth:api')->post('add-product', 'Product\ProductController@addProduct');
-Route::middleware('auth:api')->put('edit-product/{id}', 'Product\ProductController@editProduct');
-Route::middleware('auth:api')->delete('deleteProduct/{id}', 'Product\ProductController@deleteProduct');
+    Route::get('/products/index', 'Product\ProductController@index')->name('suppliers.index');
+    Route::post('/products/add', 'Product\ProductController@store')->name('products.store');
+    Route::put('/products/{id}/update', 'Product\ProductController@update')->name('products.update');
+    Route::delete('/products/{id}/delete', 'Product\ProductController@destroy')->name('products.destroy');
 
 // order
-Route::middleware('auth:api')->get('orders', 'Order\OrderController@getAll');
-Route::middleware('auth:api')->post('add-order', 'Order\OrderController@addOrder');
-Route::middleware('auth:api')->put('edit-order/{id}', 'Order\OrderController@editOrder');
-Route::middleware('auth:api')->delete('delete-order/{id}', 'Order\OrderController@deleteOrder');
+    Route::get('/orders/index', 'Order\OrderController@index')->name('orders.index');
+    Route::post('/orders/add', 'Order\OrderController@store')->name('orders.store');
+    Route::put('/orders/{id}/update', 'Order\OrderController@update')->name('orders.update');
+    Route::delete('/orders/{id}/delete', 'Order\OrderController@destroy')->name('orders.destroy');
+
+});

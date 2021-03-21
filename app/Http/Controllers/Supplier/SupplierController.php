@@ -10,16 +10,21 @@ use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class SupplierController extends Controller
 {
-    public function getAll()
+    public function index()
     {
         return SupplierResource::collection(Supplier::paginate(10));
     }
 
-    public function addSupplier()
+    public function store()
     {
         $data = request()->validate([
             'name' => 'required'
         ]);
+
+//        $role = $data['role_id'];
+//        $data = Arr::except($data, ['role_id']);
+//        $user = Supplier::create($data);
+//        $user->roles()->attach($role);
 
         $supplier = Supplier::create($data);
         $supplier->products()->attach(2);
@@ -28,14 +33,14 @@ class SupplierController extends Controller
     }
 
 
-    public function editSupplier($id)
+    public function update($id)
     {
-        $data = \request()->validate([
+        $data = request()->validate([
             'name' => 'required',
             'description' => 'required',
             'quantity' => 'required'
         ]);
-        $supplier = Supplier::findOrFail($id);
+        $supplier = Supplier::find($id);
         if ($supplier) {
             throw new UnprocessableEntityHttpException('Supplier Not Found');
         }
@@ -44,9 +49,14 @@ class SupplierController extends Controller
         return response()->json(['data', new SupplierResource($supplier)]);
     }
 
-    public function deleteSupplier($id)
+    public function destroy($id)
     {
-        $supplier = Supplier:: findOrFail($id);
+        $supplier = Supplier:: find($id);
+
+
+        if (!$supplier) {
+            throw new UnprocessableEntityHttpException('Supplier Not Found');
+        }
         $supplier->delete();
     }
 }

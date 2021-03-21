@@ -2,6 +2,7 @@
 
 use App\Order\Order;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class OrderTableSeeder extends Seeder
 {
@@ -12,6 +13,10 @@ class OrderTableSeeder extends Seeder
      */
     public function run()
     {
+
+        DB::table('orders')->truncate();
+        DB::table('order_details')->truncate();
+
         $order = Order::create([
             'order_no' => '1',
         ]);

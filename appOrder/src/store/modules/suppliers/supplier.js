@@ -32,7 +32,7 @@ const actions = {
   ADD_SUPPLIER(context, form) {
     context.commit('SET_ADDING_SUPPLIER', true);
     axios
-      .post(baseUrl + 'add-supplier/', appendForm(form))
+      .post(baseUrl + 'supplier/add', appendForm(form))
       // eslint-disable-next-line no-unused-vars
       .then(({ data }) => {
         context.commit('SET_ADDING_SUPPLIER', false);
@@ -42,6 +42,7 @@ const actions = {
           position: 'top'
         };
         context.commit('SET_NOTIFICATION', alert, { root: true });
+        context.dispatch('FETCH_SUPPLIERS', { page: 1 });
       })
       .catch(error => {
         context.commit('SET_ADDING_SUPPLIER', false);
@@ -61,12 +62,11 @@ const actions = {
       });
   },
 
-  FETCH_SUPPLIERS(context, filters) {
+  FETCH_SUPPLIERS(context, pagination) {
     context.commit('SET_FETCHING_SUPPLIERS', true);
     http
-      .get(`suppliers?page=${filters.page}&filters=${JSON.stringify(filters)}`)
+      .get(`suppliers/index?page=${pagination.page}&filters=${JSON.stringify(pagination)}`)
       .then(({ data }) => {
-        console.log('supplier', data);
         context.commit('SET_FETCHING_SUPPLIERS', false);
         context.commit('SET_SUPPLIERS', data);
         // console.log('suppliers data', data)
@@ -89,16 +89,17 @@ const actions = {
     context.commit('SET_ADDING_SUPPLIER', true);
 
     http
-      .post(baseUrl + 'edit-supplier/' + form.id, appendEditForm(form))
+      .post(`suppliers/${form.id}/update`, appendEditForm(form))
       // eslint-disable-next-line no-unused-vars
       .then(({ data }) => {
         context.commit('SET_ADDING_SUPPLIER', false);
         let alert = {
           type: 'positive',
-          message: 'Edit Successful',
+          message: 'Supplier Edited Successfully',
           position: 'top'
         };
         context.commit('SET_NOTIFICATION', alert, { root: true });
+        context.dispatch('FETCH_SUPPLIERS', { page: 1 });
       })
       .catch(error => {
         context.commit('SET_ADDING_SUPPLIER', false);
@@ -119,18 +120,18 @@ const actions = {
   },
 
   DELETE_SUPPLIER(context, id) {
-    context.commit('SET_ADDING_SUPPLIER', true);
-    // eslint-disable-next-line no-unused-vars
-    http.delete(baseUrl + 'delete-supplier/' + id).then(({ data }) => {
-      context.commit('SET_ADDING_SUPPLIER', false);
-      let alert = {
-        type: 'positive',
-        message: 'Delete Successful',
-        position: 'top'
-      };
-      context.commit('SET_NOTIFICATION', alert, { root: true });
-      context.commit('SET_ADDING_USER', false);
-    });
+    http
+      .delete(`suppliers/${id}/delete`)
+      // eslint-disable-next-line no-unused-vars
+      .then(({ data }) => {
+        let alert = {
+          type: 'positive',
+          message: 'Delete Successful',
+          position: 'top'
+        };
+        context.commit('SET_NOTIFICATION', alert, { root: true });
+        context.dispatch('FETCH_SUPPLIERS', { page: 1 });
+      });
   }
 };
 

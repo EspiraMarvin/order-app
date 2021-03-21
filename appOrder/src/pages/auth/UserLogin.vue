@@ -61,15 +61,6 @@
                   class="text-capitalize rounded-borders"
                 />
               </div>
-              <div class="col-md-6 col-xs-6 col-sm-6 float-right">
-                <q-btn
-                  flat
-                  color="secondary"
-                  label="Create New Account"
-                  @click="btnRegPage"
-                  class="text-capitalize rounded-borders"
-                />
-              </div>
             </div>
           </div>
         </div>
@@ -124,10 +115,6 @@ export default {
     },
 
     btnForgotPwd() {},
-
-    btnRegPage() {
-      this.$router.push({ name: 'UserRegister' });
-    },
 
     loginSuccess() {
       if (this.loggedIn) {

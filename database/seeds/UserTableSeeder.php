@@ -3,6 +3,8 @@
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+
 
 class UserTableSeeder extends Seeder
 {
@@ -13,6 +15,8 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('users')->truncate();
+        DB::table('role_user')->truncate();
         $user = User::create([
             'name' => 'Espira Marvin',
             'email' => 'espiramarvin@gmail.com',
@@ -27,7 +31,7 @@ class UserTableSeeder extends Seeder
             'password' => Hash::make('123secret'),
         ]);
 
-        $user->roles()->attach(1);
+        $user->roles()->attach(2);
 
         $user = User::create([
             'name' => 'Jane Doe',
@@ -35,6 +39,6 @@ class UserTableSeeder extends Seeder
             'password' => Hash::make('123secret'),
         ]);
 
-        $user->roles()->attach(1);
+        $user->roles()->attach(2);
     }
 }

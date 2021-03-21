@@ -2,6 +2,7 @@
 
 use App\Supplier\Supplier;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class SupplierTableSeeder extends Seeder
 {
@@ -12,6 +13,7 @@ class SupplierTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('suppliers')->truncate();
 
         $supplier = Supplier::create([
             'name' => 'John Doe'

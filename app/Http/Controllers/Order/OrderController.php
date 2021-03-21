@@ -10,12 +10,12 @@ use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class OrderController extends Controller
 {
-    public function getAll()
+    public function index()
     {
         return OrderResource::collection(Order::paginate(10));
     }
 
-    public function addOrder()
+    public function store()
     {
         $data = request()->validate([
             'name' => 'required',
@@ -29,14 +29,14 @@ class OrderController extends Controller
     }
 
 
-    public function editSupplier($id)
+    public function update($id)
     {
-        $data = \request()->validate([
+        $data = request()->validate([
             'name' => 'required',
             'description' => 'required',
             'quantity' => 'required'
         ]);
-        $order = Order::findOrFail($id);
+        $order = Order::find($id);
         if ($order) {
             throw new UnprocessableEntityHttpException('Order Not Found');
         }
@@ -45,9 +45,14 @@ class OrderController extends Controller
         return response()->json(['data', new OrderResource($order)]);
     }
 
-    public function deleteSupplier($id)
+    public function destroy($id)
     {
-        $order = Order:: findOrFail($id);
+        $order = Order:: find($id);
+
+        if (!$order) {
+            throw new UnprocessableEntityHttpException('Order Not Found');
+        }
+
         $order->delete();
     }
 }

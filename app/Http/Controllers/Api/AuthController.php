@@ -7,6 +7,7 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Response;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
@@ -21,17 +22,19 @@ class AuthController extends Controller
     public function register()
     {
         $data = request()->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-//            'phone' => 'required',
-//            'id_no' => 'required',
-            'password' => 'required'
+            'name' => 'required|string|max:191',
+            'email' => 'required|email|max:191|unique:users',
+            'password' => 'required|string|min:6'
         ]);
 
         $data['password'] = Hash::make($data['password']);
 
+        $data['password'] = Hash::make($data['password']);
+        $role = $data['role_id'];
+        $data = Arr::except($data, ['role_id']);
+
         $user = User::create($data);
-        $user->roles()->attach(2);
+        $user->roles()->attach($role);
 
         return response()->json(['data' => new UserResource($user)]);
     }
@@ -43,26 +46,60 @@ class AuthController extends Controller
      */
     public function login()
     {
-        $login = request()->validate([
-            'email' => 'required|email',
+        $data = request()->validate([
+            'email' => 'required|string|email',
             'password' => 'required|string'
         ]);
 
-        if (!Auth::attempt($login)) {
-            throw new UnprocessableEntityHttpException('Invalid Login Credentials');
+        $user = User::where('email', $data['email'])->first();
+
+        if (!$user) {
+            throw new UnprocessableEntityHttpException('User with that email does not exist!');
         }
 
-//        dd('login',$login);
+        if (Hash::check($data['password'], $user->password)) {
+            $token = $user->createToken('Laravel Password Grant Client')->accessToken;
 
-        $accessToken = Auth::user()->createToken('authToken')->accessToken;
-
-        return response(['user' => new UserResource(Auth::User()), 'access_token' => $accessToken]);
+            //return response with token and user object
+            $response = ['token' => $token, 'user' => new UserResource($user), 'message' => 'Login success!'];
+            return response()->json($response, 200);
+        } else {
+            throw new UnprocessableEntityHttpException('Password miss match, please try again!');
+        }
     }
 
-    public function userDetails()
+    public function createUser()
     {
-        $user = request()->user();
+        $data = request()->validate([
+            'name' => 'required|string|max:191',
+            'email' => 'required|string|email|max:191|unique:users',
+            'phone' =>  'required',
+            'password' => 'required|string|min:6',
+            'role_id' => 'required'
+        ]);
+
+        $data['password'] = Hash::make($data['password']);
+        $role = $data['role_id'];
+        $data = Arr::except($data, ['role_id']);
+
+        $user = User::create($data);
+        $user->roles()->attach($role);
 
         return response()->json(['data' => new UserResource($user)]);
+    }
+
+
+    public function userLogout()
+    {
+        request()->user()->token()->revoke();
+
+        $response = ['status' =>true, 'message' => 'Logout success!'];
+
+        return response()->json($response, 200);
+    }
+
+    public function getCurrentUser()
+    {
+        return response()->json(['data' => new UserResource(request()->user())]);
     }
 }

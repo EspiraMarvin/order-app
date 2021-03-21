@@ -2,6 +2,7 @@
 
 use App\Models\Role;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class RoleTableSeeder extends Seeder
 {
@@ -12,6 +13,9 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
+
+        DB::table('roles')->truncate();
+
         Role::create([
             'name' => 'admin',
             'display_name' => 'Administrator'
@@ -22,5 +26,7 @@ class RoleTableSeeder extends Seeder
             'display_name' => 'Supplier'
 //            'display_name' => 'Normal User'
         ]);
+
+
     }
 }

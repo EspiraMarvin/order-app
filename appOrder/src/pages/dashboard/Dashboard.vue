@@ -1,8 +1,6 @@
 <template>
   <q-page class="">
-    <q-card elevated>
-      wtf
-    </q-card>
+    <q-card elevated> </q-card>
   </q-page>
 </template>
 

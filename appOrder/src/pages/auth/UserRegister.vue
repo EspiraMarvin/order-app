@@ -30,14 +30,6 @@
                 :rules="[val => (val && val.length > 0) || 'Please type your email']"
               />
               <q-input
-                type="text"
-                v-model="form.phone"
-                label="Phone Number*"
-                lazy-rules
-                :rules="[val => (val && val.length > 0) || 'Please type your phone number']"
-              />
-
-              <q-input
                 type="password"
                 v-model="form.password"
                 label="Password *"

@@ -10,12 +10,12 @@ use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class ProductController extends Controller
 {
-    public function getAll()
+    public function index()
     {
         return ProductResource::collection(Product::paginate(10));
     }
 
-    public function addProduct()
+    public function store()
     {
         $data = request()->validate([
             'name' => 'required',
@@ -25,7 +25,7 @@ class ProductController extends Controller
 
         $product = Product::create($data);
         // trying to attach all
-        $product->products()->attach();
+        $product->products()->attach(1);
         // attaching two to see the difference
 //        $product->products()->attach(2);
 
@@ -36,14 +36,14 @@ class ProductController extends Controller
     }
 
 
-    public function editProduct($id)
+    public function update($id)
     {
         $data = \request()->validate([
             'name' => 'required',
             'description' => 'required',
             'quantity' => 'required'
         ]);
-        $product = Product::findOrFail($id);
+        $product = Product::find($id);
         if ($product) {
             throw new UnprocessableEntityHttpException('Product Not Found');
         }
@@ -52,9 +52,14 @@ class ProductController extends Controller
         return response()->json(['data', new ProductResource($product)]);
     }
 
-    public function deleteProduct($id)
+    public function destroy($id)
     {
-        $product = Product:: findOrFail($id);
+        $product = Product:: find($id);
+
+        if (!$product) {
+            throw new UnprocessableEntityHttpException('Product Not Found');
+        }
+
         $product->delete();
     }
 }

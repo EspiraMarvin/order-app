@@ -32,7 +32,7 @@ const actions = {
   ADD_PRODUCT(context, form) {
     context.commit('SET_ADDING_PRODUCT', true);
     axios
-      .post(baseUrl + 'add-product/', appendForm(form))
+      .post(baseUrl + 'products/add', appendForm(form))
       // eslint-disable-next-line no-unused-vars
       .then(({ data }) => {
         context.commit('SET_ADDING_PRODUCT', false);
@@ -42,6 +42,7 @@ const actions = {
           position: 'top'
         };
         context.commit('SET_NOTIFICATION', alert, { root: true });
+        context.dispatch('FETCH_PRODUCTS', { page: 1 });
       })
       .catch(error => {
         context.commit('SET_ADDING_PRODUCT', false);
@@ -61,10 +62,10 @@ const actions = {
       });
   },
 
-  FETCH_PRODUCTS(context, filters) {
+  FETCH_PRODUCTS(context, pagination) {
     context.commit('SET_FETCHING_PRODUCTS', true);
     http
-      .get(`products?page=${filters.page} &filters=${JSON.stringify(filters)}`)
+      .get(`products/index?page=${pagination.page}&filters=${JSON.stringify(pagination)}`)
       .then(({ data }) => {
         context.commit('SET_FETCHING_PRODUCTS', false);
         context.commit('SET_PRODUCTS', data);
@@ -88,7 +89,7 @@ const actions = {
     context.commit('SET_ADDING_PRODUCT', true);
 
     http
-      .post(baseUrl + 'edit-product/' + form.id, appendEditForm(form))
+      .post(`products/${form.id}/update`, appendEditForm(form))
       // eslint-disable-next-line no-unused-vars
       .then(({ data }) => {
         context.commit('SET_ADDING_PRODUCT', false);
@@ -98,6 +99,7 @@ const actions = {
           position: 'top'
         };
         context.commit('SET_NOTIFICATION', alert, { root: true });
+        context.dispatch('FETCH_PRODUCTS', { page: 1 });
       })
       .catch(error => {
         context.commit('SET_ADDING_PRODUCT', false);
@@ -118,18 +120,19 @@ const actions = {
   },
 
   DELETE_PRODUCT(context, id) {
-    context.commit('SET_ADDING_PRODUCT', true);
     // eslint-disable-next-line no-unused-vars
-    http.delete(baseUrl + 'delete-product/' + id).then(({ data }) => {
-      context.commit('SET_ADDING_PRODUCT', false);
-      let alert = {
-        type: 'positive',
-        message: 'Delete Successful',
-        position: 'top'
-      };
-      context.commit('SET_NOTIFICATION', alert, { root: true });
-      context.commit('SET_ADDING_PRODUCT', false);
-    });
+    http
+      .delete(`products/${id}/delete`)
+      // eslint-disable-next-line no-unused-vars
+      .then(({ data }) => {
+        let alert = {
+          type: 'positive',
+          message: 'Delete Successful',
+          position: 'top'
+        };
+        context.commit('SET_NOTIFICATION', alert, { root: true });
+        context.dispatch('FETCH_PRODUCTS', { page: 1 });
+      });
   }
 };
 

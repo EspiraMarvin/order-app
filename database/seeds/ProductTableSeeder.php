@@ -2,6 +2,7 @@
 
 use App\Product\Product;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ProductTableSeeder extends Seeder
 {
@@ -12,6 +13,9 @@ class ProductTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('products')->truncate();
+        DB::table('product_supplier')->truncate();
+
         $product = Product::create([
             'name' => 'Pace Sol',
             'description' => 'This is a headset by Sauti Sol',

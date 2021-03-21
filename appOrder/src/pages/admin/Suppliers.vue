@@ -104,13 +104,12 @@
       </div>
     </q-card>
 
-
     <!-- dialogs -->
     <q-dialog v-model="confirm" transition-show="rotate" transition-hide="rotate" persistent>
       <q-card>
         <q-card-section class="row items-center">
           <q-avatar icon="warning" color="white" text-color="red" />
-          <span class="q-ml-sm">This Action Deletes User. Proceed? </span>
+          <span class="q-ml-sm">This Action Deletes Supplier. Proceed? </span>
         </q-card-section>
 
         <q-card-actions align="right">
@@ -269,6 +268,7 @@ export default {
     },
     buttonView(row) {
       this.viewing = true;
+
       this.userForm.name = row.name;
       this.createEditSupplierDialog = true;
       this.dialogTitle = 'View Supplier';
