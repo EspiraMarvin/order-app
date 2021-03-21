@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SupplierResource extends JsonResource
@@ -19,9 +20,8 @@ class SupplierResource extends JsonResource
         'type' => 'Supplier Object',
         'id' => $this->id,
         'name' => $this->name,
-        'created_at' => $this->created_at,
-        'updated_at' => $this->updated_at,
-        'deleted_at' => $this->deleted_at,
+        'created_at' => Carbon::parse($this->created_at)->toDateTimeString(),
+        'updated_at' => Carbon::parse($this->updated_at)->toDateTimeString(),
         'relationships' => [
             'products' => $this->products,
         ]

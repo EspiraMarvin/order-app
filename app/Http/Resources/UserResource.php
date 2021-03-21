@@ -22,7 +22,6 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'created_at' => Carbon::parse($this->created_at)->toDateTimeString(),
             'updated_at' => Carbon::parse($this->updated_at)->toDateTimeString(),
-//            'deleted_at' => Carbon::parse($this->deleted_at)->toDateTimeString(),
             'relationships' => [
                 'roles' => $this->roles,
             ]
