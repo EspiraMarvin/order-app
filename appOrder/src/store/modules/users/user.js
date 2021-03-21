@@ -81,7 +81,7 @@ const actions = {
       });
   },
 
-  REGISTER_USER(context, form) {
+  ADD_USER(context, form) {
     context.commit('SET_ADDING_USER', true);
 
     axios

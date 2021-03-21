@@ -45,7 +45,7 @@
             </template>
           </q-input>
           <q-btn
-            label="Add Supplier"
+            label="Add Order"
             color="gray"
             class="q-mr-sm text-black q-pl-md q-pr-md"
             @click="buttonCreate"
@@ -126,10 +126,10 @@
         </q-toolbar>
         <hr />
         <q-card-section class="q-pt-none">
-          <q-form ref="userForm">
+          <q-form ref="orderForm">
             <q-input
               filled
-              v-model="userForm.order_no"
+              v-model="orderForm.order_no"
               label="Name *"
               type="text"
               :disable="viewing"
@@ -175,7 +175,7 @@ export default {
   },
   data() {
     return {
-      userForm: {
+      orderForm: {
         id: '',
         order_no: ''
       },
@@ -261,14 +261,14 @@ export default {
       this.viewing = false;
       this.editing = true;
 
-      this.userForm.id = row2.id;
-      this.userForm.order_no = row2.order_no;
+      this.orderForm.id = row2.id;
+      this.orderForm.order_no = row2.order_no;
       this.createEditOrderDialog = true;
       this.dialogTitle = 'Edit Product';
     },
     buttonView(row) {
       this.viewing = true;
-      this.userForm.order_no = row.order_no;
+      this.orderForm.order_no = row.order_no;
       this.createEditOrderDialog = true;
       this.dialogTitle = 'View Order';
     },
@@ -282,13 +282,13 @@ export default {
     },
     btnSave() {
       console.log('clicked');
-      this.$refs.userForm.validate().then(success => {
+      this.$refs.orderForm.validate().then(success => {
         if (success) {
           if (!this.editing) {
             console.log('success', success);
-            this.addOrder(this.userForm);
+            this.addOrder(this.orderForm);
           } else {
-            this.editOrder(this.userForm);
+            this.editOrder(this.orderForm);
           }
         } else {
           this.orderNotify('negative', 'Please fill all required fields *', 'top');

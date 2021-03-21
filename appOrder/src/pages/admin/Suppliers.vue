@@ -126,10 +126,10 @@
         </q-toolbar>
         <hr />
         <q-card-section class="q-pt-none">
-          <q-form ref="userForm">
+          <q-form ref="supplierForm">
             <q-input
               filled
-              v-model="userForm.name"
+              v-model="supplierForm.name"
               label="Name *"
               type="text"
               :disable="viewing"
@@ -175,7 +175,7 @@ export default {
   },
   data() {
     return {
-      userForm: {
+      supplierForm: {
         id: '',
         name: ''
       },
@@ -261,15 +261,15 @@ export default {
       this.viewing = false;
       this.editing = true;
 
-      this.userForm.id = row2.id;
-      this.userForm.name = row2.name;
+      this.supplierForm.id = row2.id;
+      this.supplierForm.name = row2.name;
       this.createEditSupplierDialog = true;
       this.dialogTitle = 'Edit Supplier';
     },
     buttonView(row) {
       this.viewing = true;
 
-      this.userForm.name = row.name;
+      this.supplierForm.name = row.name;
       this.createEditSupplierDialog = true;
       this.dialogTitle = 'View Supplier';
     },
@@ -283,13 +283,13 @@ export default {
     },
     btnSave() {
       console.log('clicked');
-      this.$refs.userForm.validate().then(success => {
+      this.$refs.supplierForm.validate().then(success => {
         if (success) {
           if (!this.editing) {
             console.log('success', success);
-            this.addSupplier(this.userForm);
+            this.addSupplier(this.supplierForm);
           } else {
-            this.editSupplier(this.userForm);
+            this.editSupplier(this.supplierForm);
           }
         } else {
           this.orderNotify('negative', 'Please fill all required fields *', 'top');

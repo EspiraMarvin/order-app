@@ -36,11 +36,11 @@ class SupplierController extends Controller
     public function update($id)
     {
         $data = request()->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'quantity' => 'required'
+            'name' => 'required'
         ]);
+
         $supplier = Supplier::find($id);
+
         if ($supplier) {
             throw new UnprocessableEntityHttpException('Supplier Not Found');
         }

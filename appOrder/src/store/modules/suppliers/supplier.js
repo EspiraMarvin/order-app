@@ -87,7 +87,6 @@ const actions = {
 
   EDIT_SUPPLIER(context, form) {
     context.commit('SET_ADDING_SUPPLIER', true);
-
     http
       .post(`suppliers/${form.id}/update`, appendEditForm(form))
       // eslint-disable-next-line no-unused-vars

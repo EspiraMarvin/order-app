@@ -319,7 +319,6 @@ export default {
       this.deleteUser(this.deleteId);
     },
     btnSave() {
-      console.log('clicked');
       this.$refs.userForm.validate().then(success => {
         if (success) {
           if (!this.editing) {

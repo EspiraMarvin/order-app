@@ -39,7 +39,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::delete('/suppliers/{id}/delete', 'Supplier\SupplierController@destroy')->name('suppliers.destroy');
 
 // product
-    Route::get('/products/index', 'Product\ProductController@index')->name('suppliers.index');
+    Route::get('/products/index', 'Product\ProductController@index')->name('products.index');
     Route::post('/products/add', 'Product\ProductController@store')->name('products.store');
     Route::put('/products/{id}/update', 'Product\ProductController@update')->name('products.update');
     Route::delete('/products/{id}/delete', 'Product\ProductController@destroy')->name('products.destroy');

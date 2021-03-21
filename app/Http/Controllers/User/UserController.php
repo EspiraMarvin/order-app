@@ -15,7 +15,11 @@ class UserController extends Controller
 {
     public function index()
     {
+//        return UserResource::collection(User::whereDoesntHave('roles', function ($q) {
+//            $q->whereKey(1);
+//        })->orderBy('created_at', 'desc')->paginate(10));
         return UserResource::collection(User::paginate(10));
+//        return UserResource::collection(User::paginate(10)->orderBy('created_at', 'desc'));
     }
 
     public function update($id)

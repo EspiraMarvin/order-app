@@ -18,8 +18,7 @@ class OrderController extends Controller
     public function store()
     {
         $data = request()->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'order_no' => 'required'
         ]);
 
         $order = Order::create($data);
@@ -32,9 +31,7 @@ class OrderController extends Controller
     public function update($id)
     {
         $data = request()->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'quantity' => 'required'
+            'order_no' => 'required',
         ]);
         $order = Order::find($id);
         if ($order) {
