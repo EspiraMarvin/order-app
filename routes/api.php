@@ -24,7 +24,7 @@ Route::post('auth/login','Api\AuthController@login');
 
 Route::group(['middleware' => ['auth:api']], function () {
     // users
-    Route::post('auth/register','Api\AuthController@register');
+    Route::post('auth/register','Api\AuthController@createUser');
     Route::get('/user_details','Api\AuthController@userDetails');
     Route::get('/users/index','User\UserController@index')->name('users.index');
     Route::put('/users/{id}/update','User\UserController@update')->name('user.update');

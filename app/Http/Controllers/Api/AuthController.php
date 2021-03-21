@@ -28,8 +28,6 @@ class AuthController extends Controller
         ]);
 
         $data['password'] = Hash::make($data['password']);
-
-        $data['password'] = Hash::make($data['password']);
         $role = $data['role_id'];
         $data = Arr::except($data, ['role_id']);
 

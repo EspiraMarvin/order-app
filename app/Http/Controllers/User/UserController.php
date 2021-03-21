@@ -18,8 +18,8 @@ class UserController extends Controller
 //        return UserResource::collection(User::whereDoesntHave('roles', function ($q) {
 //            $q->whereKey(1);
 //        })->orderBy('created_at', 'desc')->paginate(10));
-        return UserResource::collection(User::paginate(10));
-//        return UserResource::collection(User::paginate(10)->orderBy('created_at', 'desc'));
+//        return UserResource::collection(User::paginate(10));
+        return UserResource::collection(User::orderBy('created_at', 'desc')->paginate(10));
     }
 
     public function update($id)
