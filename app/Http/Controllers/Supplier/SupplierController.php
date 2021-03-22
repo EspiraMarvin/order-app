@@ -29,7 +29,7 @@ class SupplierController extends Controller
         $supplier = Supplier::create($data);
         $supplier->products()->attach($product);
 
-        return response()->json(['data' => new SupplierResource($data)]);
+        return response()->json(['data' => new SupplierResource($supplier)]);
     }
 
 

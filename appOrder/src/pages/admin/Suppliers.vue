@@ -136,21 +136,33 @@
               lazy-rules
               :rules="[val => (val && val.length > 0) || 'Name Required']"
             />
-            <div v-show="viewing">
-              <p class="text-center">Products List</p>
-              <template v-if="supplierProducts.length">
-                <p class="text-center">Total: {{ supplierProducts.length }}</p>
-                <q-list bordered v-for="product in supplierProducts" :key="product.id">
-                  <q-item>
-                    <q-item-section> {{ product.name }} </q-item-section>
-                  </q-item>
-                </q-list>
-              </template>
-              <template v-else>
-                <p class="text-center">No Products for this Supplier</p>
-              </template>
-            </div>
+            <q-select
+              v-if="!editing"
+              label="Product"
+              filled
+              map-options
+              multiple
+              :disable="viewing"
+              v-model="products"
+              :options="productsResult.data"
+              option-value="product_id"
+              option-label="name"
+            />
           </q-form>
+          <div v-show="viewing">
+            <p class="text-center">Products List</p>
+            <template v-if="supplierProducts.length">
+              <p class="text-center">Total: {{ supplierProducts.length }}</p>
+              <q-list bordered v-for="product in supplierProducts" :key="product.id">
+                <q-item>
+                  <q-item-section> {{ product.name }} </q-item-section>
+                </q-item>
+              </q-list>
+            </template>
+            <template v-else>
+              <p class="text-center">No Products for this Supplier</p>
+            </template>
+          </div>
         </q-card-section>
 
         <q-card-actions align="right" class="bg-white" v-show="!viewing">
@@ -190,8 +202,10 @@ export default {
     return {
       supplierForm: {
         id: '',
-        name: ''
+        name: '',
+        products: []
       },
+      products: [],
       filter: '',
       selected: [],
       supplierProducts: [],
@@ -302,6 +316,7 @@ export default {
       this.$refs.supplierForm.validate().then(success => {
         if (success) {
           if (!this.editing) {
+            this.supplierForm.products = this.products.map(product => product.id);
             this.addSupplier(this.supplierForm);
           } else {
             this.editSupplier(this.supplierForm);

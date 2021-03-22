@@ -16,6 +16,7 @@ class SupplierTableSeeder extends Seeder
         DB::table('suppliers')->truncate();
         DB::table('product_supplier')->truncate();
 
+
         $supplier = Supplier::create([
             'name' => 'John Doe'
         ]);
