@@ -47,5 +47,26 @@ class ProductTableSeeder extends Seeder
             'quantity' => '1',
         ]);
 
+
+        Product::create([
+            'name' => 'Amazon FireTv',
+            'description' => 'For SmartTv Home',
+            'quantity' => '3',
+        ]);
+
+
+        Product::create([
+            'name' => 'Samsung Galaxy A71 Matte',
+            'description' => 'High End Smartphone',
+            'quantity' => '2',
+        ]);
+
+        Product::create([
+            'name' => 'USB Type C',
+            'description' => 'Phone Accessory',
+            'quantity' => '6',
+        ]);
+
     }
+
 }

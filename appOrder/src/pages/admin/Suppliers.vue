@@ -127,14 +127,27 @@
         <hr />
         <q-card-section class="q-pt-none">
           <q-form ref="supplierForm">
-            <q-input
+            <!--            <q-input-->
+            <!--              filled-->
+            <!--              v-model="supplierForm.name"-->
+            <!--              label="Name *"-->
+            <!--              type="text"-->
+            <!--              :disable="viewing"-->
+            <!--              lazy-rules-->
+            <!--              :rules="[val => (val && val.length > 0) || 'Name Required']"-->
+            <!--            />-->
+            <q-select
+              label="User"
               filled
-              v-model="supplierForm.name"
-              label="Name *"
-              type="text"
+              emit-value
+              map-options
               :disable="viewing"
-              lazy-rules
-              :rules="[val => (val && val.length > 0) || 'Name Required']"
+              transition-show="scale"
+              transition-hide="scale"
+              v-model="supplierForm.name"
+              :options="usersResult.data"
+              option-value="name"
+              option-label="name"
             />
             <q-select
               v-if="!editing"
@@ -231,7 +244,8 @@ export default {
       loadingSuppliers: 'GET_FETCHING_SUPPLIERS',
       suppliersResult: 'GET_SUPPLIERS',
       addingSupplier: 'GET_ADDING_SUPPLIER',
-      productsResult: 'GET_PRODUCTS'
+      productsResult: 'GET_PRODUCTS',
+      usersResult: 'GET_USERS'
     }),
     tableHeaders() {
       let columnObjects = [];

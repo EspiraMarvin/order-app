@@ -46,5 +46,11 @@ class OrderTableSeeder extends Seeder
         ]);
 
         $order->products()->attach(4);
+
+        $order = Order::create([
+            'order_no' => '6',
+        ]);
+
+        $order->products()->attach(5);
     }
 }
