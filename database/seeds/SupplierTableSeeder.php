@@ -14,6 +14,7 @@ class SupplierTableSeeder extends Seeder
     public function run()
     {
         DB::table('suppliers')->truncate();
+        DB::table('product_supplier')->truncate();
 
         $supplier = Supplier::create([
             'name' => 'John Doe'
@@ -25,7 +26,7 @@ class SupplierTableSeeder extends Seeder
             'name' => 'Jane Doe'
         ]);
 
-        $supplier->products()->attach(2);
+        $supplier->products()->attach([2,4]);
 
         $supplier = Supplier::create([
             'name' => 'Billy Kimber'
@@ -36,7 +37,7 @@ class SupplierTableSeeder extends Seeder
         $supplier = Supplier::create([
             'name' => 'Thomas Shelby'
         ]);
-        $supplier->products()->attach(4);
+        $supplier->products()->attach([4,5]);
 
 
         $supplier = Supplier::create([
