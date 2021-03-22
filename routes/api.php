@@ -30,11 +30,14 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::post('/users/add','User\UserController@store')->name('users.add');
     Route::put('/users/{id}/update','User\UserController@update')->name('user.update');
     Route::delete('/users/{id}/delete', 'User\UserController@destroy')->name('users.destroy');
-
-    Route::get('/dashboard/admin', 'User\UserController@AdminProductIndex')->name('dashboard.admin');
-    Route::get('dashboard/admin/get', 'User\UserController@AdminOrderIndex');
-    // roles
     Route::get('/users/roles/get', 'User\UserController@rolesIndex')->name('user.roles.get');
+
+    // search
+    Route::post('/contacts/full-search', 'User\UserController@userSearch')->name('user.search');
+
+    // dashboard
+    Route::get('/dashboard/admin', 'User\UserController@AdminProductIndex')->name('dashboard.admin');
+    // roles
 
 // supplier
     Route::get('/suppliers/index', 'Supplier\SupplierController@index')->name('suppliers.index');

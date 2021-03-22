@@ -31,5 +31,17 @@ class SupplierTableSeeder extends Seeder
             'name' => 'Billy Kimber'
         ]);
         $supplier->products()->attach(3);
+
+
+        $supplier = Supplier::create([
+            'name' => 'Thomas Shelby'
+        ]);
+        $supplier->products()->attach(4);
+
+
+        $supplier = Supplier::create([
+            'name' => 'Paul Pogba'
+        ]);
+        $supplier->products()->attach(5);
     }
 }

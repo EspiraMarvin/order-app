@@ -90,13 +90,25 @@ class UserController extends Controller
         return UniversalResource::collection($products);
     }
 
-    public function AdminOrderIndex()
-    {
-        $orders = Order::orderBy('created_at', 'desc')
-            ->withCount('products')
-            ->paginate(50);
 
-        return UniversalResource::collection($orders);
+    public function userSearch() {
+        $data = request()->validate([
+            'filters' => 'required'
+        ]);
+
+        $user = User::query()
+            ->where('id', $data['filters'])
+            ->orWhere('name', $data['filters'])
+            ->orWhere('email', $data['filters'])
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
+        return response()->json([
+            'data' => [
+                'user' => $user
+            ]
+        ]);
+
     }
 
 }

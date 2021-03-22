@@ -31,6 +31,7 @@
 
         <template v-slot:top-right>
           <q-input
+            v-if="false"
             borderless
             dense
             debounce="1000"
@@ -56,7 +57,7 @@
               <q-td class="text-center" v-if="col.name !== 'actions'" :key="col.name">
                 {{ props.row[col.name] }}
               </q-td>
-              <q-td v-if="col.name === 'actions'" :key="col.name">
+              <q-td v-if="col.name === 'actions'" :key="col.name" align="center">
                 <q-btn
                   class="q-ma-xs"
                   outline

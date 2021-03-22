@@ -6,6 +6,7 @@ import userStore from './modules/users/index';
 import supplierStore from './modules/suppliers/index';
 import productStore from './modules/products/index';
 import orderStore from './modules/orders/index';
+import DashboardStore from './modules/dashboard/index';
 
 Vue.use(Vuex);
 
@@ -24,7 +25,8 @@ export const Store = new Vuex.Store({
     userStore,
     supplierStore,
     productStore,
-    orderStore
+    orderStore,
+    DashboardStore
   },
 
   strict: process.env.DEV

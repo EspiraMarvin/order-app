@@ -19,7 +19,6 @@ export const appendEditForm = function(form) {
     }
   }
 
-
   formData.append('_method', 'put');
 
   return formData;

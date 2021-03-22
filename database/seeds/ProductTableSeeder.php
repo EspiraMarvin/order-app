@@ -22,7 +22,6 @@ class ProductTableSeeder extends Seeder
             'quantity' => '4',
         ]);
 
-//        $product->orders()->attach(1);
         $product->suppliers()->attach(1);
 
         $product = Product::create([
@@ -31,7 +30,6 @@ class ProductTableSeeder extends Seeder
             'quantity' => '1',
         ]);
 
-//        $product->orders()->attach(1);
         $product->suppliers()->attach(2);
 
         $product = Product::create([
@@ -40,7 +38,22 @@ class ProductTableSeeder extends Seeder
             'quantity' => '1',
         ]);
 
-//        $product->orders()->attach(1);
         $product->suppliers()->attach(3);
+
+        $product = Product::create([
+            'name' => 'Standing Desk 1metre',
+            'description' => 'For Developers',
+            'quantity' => '1',
+        ]);
+
+        $product->suppliers()->attach(4);
+
+        $product = Product::create([
+            'name' => 'Office Chair Black',
+            'description' => 'For Developers',
+            'quantity' => '1',
+        ]);
+
+        $product->suppliers()->attach(5);
     }
 }

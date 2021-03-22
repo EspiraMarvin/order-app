@@ -190,7 +190,7 @@ export default {
     return {
       supplierForm: {
         id: '',
-        name: '',
+        name: ''
       },
       filter: '',
       selected: [],
