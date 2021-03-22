@@ -79,7 +79,9 @@ class UserController extends Controller
 
     public function rolesIndex()
     {
-        return UniversalResource::collection(Role::paginate(15));
+        return UniversalResource::collection(Role::query()->where('name', '!=', 'admin')->paginate(15));
+
+//        return UniversalResource::collection(Role::paginate(15));
     }
 
 
