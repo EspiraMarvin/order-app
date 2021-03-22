@@ -130,13 +130,14 @@
             <q-input
               filled
               v-model="orderForm.order_no"
-              label="Name *"
+              label="Order Number *"
               type="text"
               :disable="viewing"
               lazy-rules
-              :rules="[val => (val && val.length > 0) || 'Name Required']"
+              :rules="[val => (val && val.length > 0) || 'Order Number Required']"
             />
             <q-select
+              v-if="!editing"
               label="Product"
               filled
               map-options
@@ -164,7 +165,7 @@
                 </q-list>
               </template>
               <template v-else>
-                <p class="text-center">No Order Detailsr</p>
+                <p class="text-center">No Order Details</p>
               </template>
             </div>
           </q-form>
@@ -306,6 +307,7 @@ export default {
       this.orderDetails = row.relationships.products;
       this.viewing = true;
       this.orderForm.order_no = row.order_no;
+      this.orderForm.products = row.relationships.products;
       this.createEditOrderDialog = true;
       this.dialogTitle = 'View Order';
     },

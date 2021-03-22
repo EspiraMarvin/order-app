@@ -41,7 +41,19 @@ class OrderController extends Controller
             throw new UnprocessableEntityHttpException('Order Not Found');
         }
 
-        $order->name = request()->input('name');
+
+        $data = request()->validate([
+            'order_no' => 'required|unique:orders',
+            'products' => 'required'
+        ]);
+
+        $order->order_no = request()->input('order_no');
+
+        $product = json_decode($data['products']);
+        $data = Arr::except($data, ['products']);
+
+
+        $order->products()->attach($product);
 
         $order->save();
 
