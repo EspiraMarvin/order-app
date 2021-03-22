@@ -84,8 +84,8 @@ const actions = {
   ADD_USER(context, form) {
     context.commit('SET_ADDING_USER', true);
 
-    axios
-      .post(baseUrl + 'auth/register', appendForm(form))
+    http
+      .post('users/add', appendForm(form))
       // eslint-disable-next-line no-unused-vars
       .then(({ data }) => {
         context.commit('SET_ADDING_USER', false);

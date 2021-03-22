@@ -109,7 +109,7 @@
       <q-card>
         <q-card-section class="row items-center">
           <q-avatar icon="warning" color="white" text-color="red" />
-          <span class="q-ml-sm">This Action Deletes User. Proceed? </span>
+          <span class="q-ml-sm">This Action Deletes Order. Proceed? </span>
         </q-card-section>
 
         <q-card-actions align="right">
@@ -136,6 +136,37 @@
               lazy-rules
               :rules="[val => (val && val.length > 0) || 'Name Required']"
             />
+            <q-select
+              label="Product"
+              filled
+              map-options
+              multiple
+              :disable="viewing"
+              v-model="products"
+              :options="productsResult.data"
+              option-value="product_id"
+              option-label="name"
+            />
+            <div v-show="viewing">
+              <p class="text-center q-mt-sm">Order Details</p>
+              <template v-if="orderDetails.length">
+                <p class="text-center">Total: {{ orderDetails.length }}</p>
+                <q-list bordered v-for="product in orderDetails" :key="product.id">
+                  <q-item>
+                    <q-item-section>Name: {{ product.name }} </q-item-section>
+                  </q-item>
+                  <q-item>
+                    <q-item-section>Description: {{ product.description }} </q-item-section>
+                  </q-item>
+                  <q-item>
+                    <q-item-section>Quantity: {{ product.quantity }} </q-item-section>
+                  </q-item>
+                </q-list>
+              </template>
+              <template v-else>
+                <p class="text-center">No Order Detailsr</p>
+              </template>
+            </div>
           </q-form>
         </q-card-section>
 
@@ -170,17 +201,19 @@ export default {
   name: 'Orders',
   mixins: [CommonMixins],
   created() {
-    this.$store.commit('SET_DASHBOARD_TITLE', 'Orders Management');
     this.$store.dispatch('FETCH_ORDERS', this.pagination);
   },
   data() {
     return {
       orderForm: {
         id: '',
-        order_no: ''
+        order_no: '',
+        products: []
       },
+      products: [],
       filter: '',
       selected: [],
+      orderDetails: [],
       confirm: false,
       createEditOrderDialog: false,
       deleteId: '',
@@ -202,7 +235,8 @@ export default {
     ...mapGetters({
       loadingOrders: 'GET_FETCHING_ORDERS',
       ordersResult: 'GET_ORDERS',
-      addingOrder: 'GET_ADDING_ORDER'
+      addingOrder: 'GET_ADDING_ORDER',
+      productsResult: 'GET_PRODUCTS'
     }),
     tableHeaders() {
       let columnObjects = [];
@@ -254,7 +288,7 @@ export default {
       this.editing = false;
       this.viewing = false;
       this.createEditOrderDialog = true;
-      this.dialogTitle = 'Create Product';
+      this.dialogTitle = 'Create Order';
     },
     buttonEdit(row) {
       let row2 = cloneDeep(row);
@@ -263,10 +297,13 @@ export default {
 
       this.orderForm.id = row2.id;
       this.orderForm.order_no = row2.order_no;
+      this.orderForm.products = row2.products;
       this.createEditOrderDialog = true;
       this.dialogTitle = 'Edit Product';
     },
     buttonView(row) {
+      // get products relationships/ order details
+      this.orderDetails = row.relationships.products;
       this.viewing = true;
       this.orderForm.order_no = row.order_no;
       this.createEditOrderDialog = true;
@@ -281,11 +318,10 @@ export default {
       this.deleteOrder(this.deleteId);
     },
     btnSave() {
-      console.log('clicked');
       this.$refs.orderForm.validate().then(success => {
         if (success) {
           if (!this.editing) {
-            console.log('success', success);
+            this.orderForm.products = this.products.map(product => product.id);
             this.addOrder(this.orderForm);
           } else {
             this.editOrder(this.orderForm);

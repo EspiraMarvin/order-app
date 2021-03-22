@@ -18,17 +18,21 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 });*/
 
-// add/register user
+// login user
 Route::post('auth/login','Api\AuthController@login');
 
-
 Route::group(['middleware' => ['auth:api']], function () {
-    // users
-    Route::post('auth/register','Api\AuthController@createUser');
-    Route::get('/user_details','Api\AuthController@userDetails');
+    Route::get('/auth/logout', 'Api\AuthController@userLogout')->name('auth.logout');
+
+    //users
+    Route::get('/user_details','Api\AuthController@userDetails')->name('users.details');
     Route::get('/users/index','User\UserController@index')->name('users.index');
+    Route::post('/users/add','User\UserController@store')->name('users.add');
     Route::put('/users/{id}/update','User\UserController@update')->name('user.update');
     Route::delete('/users/{id}/delete', 'User\UserController@destroy')->name('users.destroy');
+
+    Route::get('/dashboard/admin', 'User\UserController@AdminProductIndex')->name('dashboard.admin');
+    Route::get('dashboard/admin/get', 'User\UserController@AdminOrderIndex');
     // roles
     Route::get('/users/roles/get', 'User\UserController@rolesIndex')->name('user.roles.get');
 

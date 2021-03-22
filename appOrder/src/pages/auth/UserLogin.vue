@@ -110,6 +110,7 @@ export default {
       this.$refs.loginForm.validate().then(success => {
         if (success) {
           this.loginUser(this.form);
+          this.$router.replace({ name: 'AdminLayout' });
         }
       });
     },
@@ -125,20 +126,15 @@ export default {
         }
         // this.$router.replace({ name: 'Dashboard' });
       }
-    },
-
-    loginReload() {
-      window.location.reload();
     }
   },
   watch: {
     currentUser: {
-      deep: true,
       handler() {
-        this.loginReload();
-      }
-    },
-    loggedIn: {}
+        this.$router.push('/admin/admin');
+      },
+      deep: true
+    }
   }
 };
 </script>

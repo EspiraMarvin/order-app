@@ -12,7 +12,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return ProductResource::collection(Product::paginate(10));
+        return ProductResource::collection(Product::with('orders','suppliers')->paginate(10));
     }
 
     public function store()
@@ -25,12 +25,12 @@ class ProductController extends Controller
 
         $product = Product::create($data);
         // trying to attach all
-        $product->products()->attach(1);
+//        $product->products()->attach(1);
         // attaching two to see the difference
 //        $product->products()->attach(2);
 
         // attaching suppliers
-        $product->suppliers()->attach();
+//        $product->suppliers()->attach();
 
         return response()->json(['data' => new ProductResource($product)]);
     }
@@ -38,17 +38,18 @@ class ProductController extends Controller
 
     public function update($id)
     {
-        $data = \request()->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'quantity' => 'required'
-        ]);
+
         $product = Product::find($id);
 
         if (!$product) {
             throw new UnprocessableEntityHttpException('Product Not Found');
         }
-        $product->update($data);
+
+        $product->name = request()->input('name');
+        $product->description = request()->input('description');
+        $product->quantity = request()->input('quantity');
+
+        $product->save();
 
         return response()->json(['data', new ProductResource($product)]);
     }

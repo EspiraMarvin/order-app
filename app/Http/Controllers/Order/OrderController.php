@@ -6,23 +6,28 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderResource;
 use App\Order\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class OrderController extends Controller
 {
     public function index()
     {
-        return OrderResource::collection(Order::paginate(10));
+        return OrderResource::collection(Order::with('products')->paginate(10));
     }
 
     public function store()
     {
         $data = request()->validate([
-            'order_no' => 'required'
+            'order_no' => 'required|unique:orders',
+            'products' => 'required'
         ]);
 
+        $product = json_decode($data['products']);
+        $data = Arr::except($data, ['products']);
+
         $order = Order::create($data);
-        $order->products()->attach(2);
+        $order->products()->attach($product);
 
         return response()->json(['data' => new OrderResource($order)]);
     }
@@ -30,15 +35,15 @@ class OrderController extends Controller
 
     public function update($id)
     {
-        $data = request()->validate([
-            'order_no' => 'required',
-        ]);
         $order = Order::find($id);
 
         if (!$order) {
             throw new UnprocessableEntityHttpException('Order Not Found');
         }
-        $order->update($data);
+
+        $order->name = request()->input('name');
+
+        $order->save();
 
         return response()->json(['data', new OrderResource($order)]);
     }

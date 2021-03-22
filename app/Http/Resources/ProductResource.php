@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use Carbon\Carbon;
+//use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -22,11 +22,13 @@ class ProductResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'quantity' => $this->quantity,
-            'created_at' => Carbon::parse($this->created_at)->toDateTimeString(),
-            'updated_at' => Carbon::parse($this->updated_at)->toDateTimeString(),
+//            'created_at' => Carbon::parse($this->created_at)->toDateTimeString(),
+            'created_at' => $this->created_at,
+//            'updated_at' => Carbon::parse($this->updated_at)->toDateTimeString(),
+            'updated_at' => $this->updated_at,
             'relationships' => [
-                'orders' => $this->orders,
-                'suppliers' => $this->suppliers,
+                'orders' => $this->whenLoaded('orders'),
+                'suppliers' => $this->whenLoaded('suppliers')
             ]
         ];
     }

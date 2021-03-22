@@ -1,5 +1,4 @@
-import { baseUrl, http } from 'src/api/service';
-import axios from 'axios';
+import { http } from 'src/api/service';
 import { appendEditForm, appendForm } from 'src/helpers/commonFunctions';
 
 const state = () => ({
@@ -31,8 +30,8 @@ const mutations = {
 const actions = {
   ADD_SUPPLIER(context, form) {
     context.commit('SET_ADDING_SUPPLIER', true);
-    axios
-      .post(baseUrl + 'supplier/add', appendForm(form))
+    http
+      .post('suppliers/add', appendForm(form))
       // eslint-disable-next-line no-unused-vars
       .then(({ data }) => {
         context.commit('SET_ADDING_SUPPLIER', false);
@@ -69,7 +68,6 @@ const actions = {
       .then(({ data }) => {
         context.commit('SET_FETCHING_SUPPLIERS', false);
         context.commit('SET_SUPPLIERS', data);
-        // console.log('suppliers data', data)
       })
       .catch(error => {
         context.commit('SET_FETCHING_SUPPLIERS', false);

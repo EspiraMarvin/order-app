@@ -71,7 +71,6 @@ class AuthController extends Controller
         $data = request()->validate([
             'name' => 'required|string|max:191',
             'email' => 'required|string|email|max:191|unique:users',
-            'phone' =>  'required',
             'password' => 'required|string|min:6',
             'role_id' => 'required'
         ]);
@@ -96,8 +95,4 @@ class AuthController extends Controller
         return response()->json($response, 200);
     }
 
-    public function getCurrentUser()
-    {
-        return response()->json(['data' => new UserResource(request()->user())]);
-    }
 }

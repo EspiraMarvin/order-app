@@ -1,5 +1,4 @@
-import { baseUrl, http } from 'src/api/service';
-import axios from 'axios';
+import { http } from 'src/api/service';
 import { appendEditForm, appendForm } from 'src/helpers/commonFunctions';
 
 const state = () => ({
@@ -31,8 +30,8 @@ const mutations = {
 const actions = {
   ADD_ORDER(context, form) {
     context.commit('SET_ADDING_ORDER', true);
-    axios
-      .post(baseUrl + 'orders/add', appendForm(form))
+    http
+      .post('orders/add', appendForm(form))
       // eslint-disable-next-line no-unused-vars
       .then(({ data }) => {
         context.commit('SET_ADDING_ORDER', false);
@@ -68,7 +67,6 @@ const actions = {
       .then(({ data }) => {
         context.commit('SET_FETCHING_ORDERS', false);
         context.commit('SET_ORDERS', data);
-        // console.log('orders data', data)
       })
       .catch(error => {
         context.commit('SET_FETCHING_ORDERS', false);

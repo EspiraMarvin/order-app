@@ -1,6 +1,9 @@
 import axios from 'axios';
 const env = process.env.NODE_ENV;
-const token = localStorage.getItem('access_token') || null;
+
+export const getAccessToken = function() {
+  return localStorage.getItem('access_token'); // should hold passport authentication token
+};
 
 export const baseUrl =
   env === 'development' || env === 'staging'
@@ -10,7 +13,18 @@ export const baseUrl =
 export const http = axios.create({
   baseURL: baseUrl,
   headers: {
-    Accept: 'application/json',
-    Authorization: `Bearer ${token}`
+    Accept: 'application/json'
   }
 });
+
+//add authorization token to the request
+http.interceptors.request.use(
+  request => {
+    request.headers['Authorization'] = `Bearer ${getAccessToken()}`;
+
+    return request;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);

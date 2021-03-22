@@ -30,13 +30,11 @@ const actions = {
     http
       .get(`users/roles/get?page=${page}`)
       .then(({ data }) => {
-        console.log('roles data', data);
         context.commit('SET_FETCHING_ROLES', false);
         context.commit('SET_ROLES', data);
       })
       .catch(error => {
         context.commit('SET_FETCHING_ROLES', false);
-        console.log(error);
         let alert = {
           type: 'negative',
           message: 'Could not fetch roles at the moment',

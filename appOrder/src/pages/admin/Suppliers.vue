@@ -57,7 +57,7 @@
               <q-td class="text-center" v-if="col.name !== 'actions'" :key="col.name">
                 {{ props.row[col.name] }}
               </q-td>
-              <q-td v-if="col.name === 'actions'" :key="col.name">
+              <q-td v-if="col.name === 'actions'" :key="col.name" align="center">
                 <q-btn
                   class="q-ma-xs"
                   outline
@@ -136,6 +136,20 @@
               lazy-rules
               :rules="[val => (val && val.length > 0) || 'Name Required']"
             />
+            <div v-show="viewing">
+              <p class="text-center">Products List</p>
+              <template v-if="supplierProducts.length">
+                <p class="text-center">Total: {{ supplierProducts.length }}</p>
+                <q-list bordered v-for="product in supplierProducts" :key="product.id">
+                  <q-item>
+                    <q-item-section> {{ product.name }} </q-item-section>
+                  </q-item>
+                </q-list>
+              </template>
+              <template v-else>
+                <p class="text-center">No Products for this Supplier</p>
+              </template>
+            </div>
           </q-form>
         </q-card-section>
 
@@ -170,17 +184,17 @@ export default {
   name: 'Suppliers',
   mixins: [CommonMixins],
   created() {
-    this.$store.commit('SET_DASHBOARD_TITLE', 'Supplier Management');
     this.$store.dispatch('FETCH_SUPPLIERS', this.pagination);
   },
   data() {
     return {
       supplierForm: {
         id: '',
-        name: ''
+        name: '',
       },
       filter: '',
       selected: [],
+      supplierProducts: [],
       confirm: false,
       createEditSupplierDialog: false,
       deleteId: '',
@@ -202,7 +216,8 @@ export default {
     ...mapGetters({
       loadingSuppliers: 'GET_FETCHING_SUPPLIERS',
       suppliersResult: 'GET_SUPPLIERS',
-      addingSupplier: 'GET_ADDING_SUPPLIER'
+      addingSupplier: 'GET_ADDING_SUPPLIER',
+      productsResult: 'GET_PRODUCTS'
     }),
     tableHeaders() {
       let columnObjects = [];
@@ -267,8 +282,10 @@ export default {
       this.dialogTitle = 'Edit Supplier';
     },
     buttonView(row) {
+      // get products relationships
+      this.supplierProducts = row.relationships.products;
+      // display view
       this.viewing = true;
-
       this.supplierForm.name = row.name;
       this.createEditSupplierDialog = true;
       this.dialogTitle = 'View Supplier';
@@ -282,11 +299,9 @@ export default {
       this.deleteSupplier(this.deleteId);
     },
     btnSave() {
-      console.log('clicked');
       this.$refs.supplierForm.validate().then(success => {
         if (success) {
           if (!this.editing) {
-            console.log('success', success);
             this.addSupplier(this.supplierForm);
           } else {
             this.editSupplier(this.supplierForm);

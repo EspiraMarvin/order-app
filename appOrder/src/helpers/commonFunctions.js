@@ -12,8 +12,13 @@ export const appendEditForm = function(form) {
   let formData = new FormData();
 
   for (let key in form) {
-    formData.append(key, form[key]);
+    if (Array.isArray(form[key])) {
+      formData.append(key, JSON.stringify(form[key]));
+    } else {
+      formData.append(key, form[key]);
+    }
   }
+
 
   formData.append('_method', 'put');
 
@@ -24,7 +29,11 @@ export const appendForm = function(form) {
   let formData = new FormData();
 
   for (let key in form) {
-    formData.append(key, form[key]);
+    if (Array.isArray(form[key])) {
+      formData.append(key, JSON.stringify(form[key]));
+    } else {
+      formData.append(key, form[key]);
+    }
   }
 
   return formData;

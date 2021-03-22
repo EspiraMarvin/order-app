@@ -136,6 +136,24 @@
               lazy-rules
               :rules="[val => (val && val.length > 0) || 'Name Required']"
             />
+            <q-input
+              filled
+              v-model="productForm.description"
+              label="Description *"
+              type="text"
+              :disable="viewing"
+              lazy-rules
+              :rules="[val => (val && val.length > 0) || 'Description Required']"
+            />
+            <q-input
+              filled
+              v-model="productForm.quantity"
+              label="Quantity *"
+              type="text"
+              :disable="viewing"
+              lazy-rules
+              :rules="[val => (val && val.length > 0) || 'Quantity Required']"
+            />
           </q-form>
         </q-card-section>
 
@@ -170,14 +188,15 @@ export default {
   name: 'Products',
   mixins: [CommonMixins],
   created() {
-    this.$store.commit('SET_DASHBOARD_TITLE', 'Products Management');
     this.$store.dispatch('FETCH_PRODUCTS', this.pagination);
   },
   data() {
     return {
       productForm: {
         id: '',
-        name: ''
+        name: '',
+        description: '',
+        quantity: ''
       },
       filter: '',
       selected: [],
@@ -263,12 +282,16 @@ export default {
 
       this.productForm.id = row2.id;
       this.productForm.name = row2.name;
+      this.productForm.description = row2.description;
+      this.productForm.quantity = row2.quantity;
       this.createEditProductDialog = true;
       this.dialogTitle = 'Edit Product';
     },
     buttonView(row) {
       this.viewing = true;
       this.productForm.name = row.name;
+      this.productForm.description = row.description;
+      this.productForm.quantity = row.quantity;
       this.createEditProductDialog = true;
       this.dialogTitle = 'View Product';
     },
@@ -281,11 +304,9 @@ export default {
       this.deleteProduct(this.deleteId);
     },
     btnSave() {
-      console.log('clicked');
       this.$refs.productForm.validate().then(success => {
         if (success) {
           if (!this.editing) {
-            console.log('success', success);
             this.addProduct(this.productForm);
           } else {
             this.editProduct(this.productForm);
