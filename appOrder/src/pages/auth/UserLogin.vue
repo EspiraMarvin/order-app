@@ -121,7 +121,7 @@ export default {
       if (this.loggedIn) {
         if (this.currentUser.relationships.roles[0].name === 'admin') {
           this.$router.replace({ name: 'AdminLayout' });
-        } else {
+        } else if (this.currentUser.relationships.roles[0].name === 'admin') {
           this.$router.replace({ name: 'Dashboard' });
         }
         // this.$router.replace({ name: 'Dashboard' });
