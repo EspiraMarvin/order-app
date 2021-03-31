@@ -1,5 +1,13 @@
 export default [
   {
+    path: '/',
+    meta: { requiresAuth: true, roles: 'normal' },
+    name: 'Root',
+    redirect: {
+      name: 'UserLogin'
+    }
+  },
+  {
     path: '/dashboard',
     meta: { requiresAuth: true, roles: 'normal' },
     name: 'Root',
