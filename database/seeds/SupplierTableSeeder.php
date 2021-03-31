@@ -1,6 +1,6 @@
 <?php
 
-use App\Supplier\Supplier;
+use App\Models\Supplier;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 

@@ -1,6 +1,6 @@
 <?php
 
-use App\Order\Order;
+use App\Models\Order;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
