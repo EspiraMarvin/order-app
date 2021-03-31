@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Str;
 
-//$DATABASE_URL=parse_url('postgres://ytahddpuygaggc:fb93e05b938750031599b9352b9dcc8aca7a29f1d00174e26452b41659b96de2@ec2-34-233-0-64.compute-1.amazonaws.com:5432/d9415lpp6a4m33');
+$DATABASE_URL=parse_url('postgres://woapwclkqklwwo:98d128831dc8739228fbe65594ce9767e4e5bf10e0294c1a1b89986728da9367@ec2-50-16-108-41.compute-1.amazonaws.com:5432/d4e9h5uv1aac61');
 
 return [
 
@@ -17,7 +17,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'pgsql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -67,12 +67,12 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => env('DATABASE_URL', ''),
-            'host' => env('DB_HOST', ''),
-            'port' => env('DB_PORT', ''),
-            'database' => env('DB_DATABASE',''),
-            'username' => env('DB_USERNAME'. ''),
-            'password' => env('DB_PASSWORD', ''),
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST', 'ec2-50-16-108-41.compute-1.amazonaws.com'),
+            'port' => env('DB_PORT', '5432'),
+            'database' => env('DB_DATABASE','d4e9h5uv1aac61'),
+            'username' => env('DB_USERNAME'. 'woapwclkqklwwo'),
+            'password' => env('DB_PASSWORD', '98d128831dc8739228fbe65594ce9767e4e5bf10e0294c1a1b89986728da9367'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
