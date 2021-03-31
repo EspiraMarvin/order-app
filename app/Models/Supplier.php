@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Order;
+namespace App\Models;
 
-use App\Product\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Order extends Model
+
+class Supplier extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
-        'order_no'
+        'name'
     ];
 
     public function products () {
-        return $this->belongsToMany(Product::class, 'order_details', 'order_id', 'product_id');
+        return $this->belongsToMany(Product::class,'product_supplier','supplier_id', 'product_id');
     }
 }

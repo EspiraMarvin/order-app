@@ -1,21 +1,19 @@
 <?php
 
-namespace App\Supplier;
+namespace App\Models;
 
-use App\Product\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
-class Supplier extends Model
+class Order extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
-        'name'
+        'order_no'
     ];
 
     public function products () {
-        return $this->belongsToMany(Product::class,'product_supplier','supplier_id', 'product_id');
+        return $this->belongsToMany(Product::class, 'order_details', 'order_id', 'product_id');
     }
 }

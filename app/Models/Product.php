@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Product;
+namespace App\Models;
 
-use App\Order\Order;
-use App\Supplier\Supplier;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 

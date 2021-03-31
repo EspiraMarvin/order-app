@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Supplier;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SupplierResource;
-use App\Supplier\Supplier;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;

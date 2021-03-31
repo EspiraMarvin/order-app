@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Str;
 
-$DATABASE_URL=parse_url('postgres://ytahddpuygaggc:fb93e05b938750031599b9352b9dcc8aca7a29f1d00174e26452b41659b96de2@ec2-34-233-0-64.compute-1.amazonaws.com:5432/d9415lpp6a4m33');
+//$DATABASE_URL=parse_url('postgres://ytahddpuygaggc:fb93e05b938750031599b9352b9dcc8aca7a29f1d00174e26452b41659b96de2@ec2-34-233-0-64.compute-1.amazonaws.com:5432/d9415lpp6a4m33');
 
 return [
 
@@ -17,7 +17,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'pgsql'),
+    'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -67,11 +67,12 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'host' => $DATABASE_URL('host'),
-            'port' => $DATABASE_URL('port'),
-            'database' => ltrim($DATABASE_URL(['path'], '/')),
-            'username' => $DATABASE_URL('user'),
-            'password' => $DATABASE_URL('pass'),
+            'url' => env('DATABASE_URL', ''),
+            'host' => env('DB_HOST', ''),
+            'port' => env('DB_PORT', ''),
+            'database' => env('DB_DATABASE',''),
+            'username' => env('DB_USERNAME'. ''),
+            'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
