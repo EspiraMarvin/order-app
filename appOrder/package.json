@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "quasar dev -m pwa",
     "build": "quasar build",
+    "build:add-pwa": "quasar mode add pwa",
     "build:pwa": "quasar build -m pwa",
     "build:android": "quasar build -m android",
     "build:android:ide": "quasar build -m android --ide",
